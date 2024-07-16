@@ -116,6 +116,9 @@ class _MyHomePageState extends State<TodoList> {
                 );
               }
             ),
+            SizedBox(
+              height: 70,
+            )
           ],
         ),
       ),

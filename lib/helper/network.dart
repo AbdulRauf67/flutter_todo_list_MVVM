@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http ;
 
 class ApiProvider{
   final String _baseUrl=
-      'https://crudcrud.com/api/965297a48d0a4846ac687e7f39f5135a';
+      'https://crudcrud.com/api/66e57fe010b44a78924840518803df6c';
 
   get(String url) async {
     try{

@@ -14,6 +14,7 @@ class TodoViewmodel extends ChangeNotifier{
     getAllTodos();
   }
   List<TodoModel> allTodos=[];
+  var ApiEndPoint="arar1";
 
   TextEditingController titleController=TextEditingController();
   TextEditingController descriptionController=TextEditingController();
@@ -34,10 +35,10 @@ class TodoViewmodel extends ChangeNotifier{
 
    getAllTodos()async{
    // _navigationService.showLoader();
-    var resData=await ApiProvider().get('/arar');
+    var resData=await ApiProvider().get('/$ApiEndPoint');
     allTodos=resData.map<TodoModel>((item)=>TodoModel.fromJson(item)).toList();
     print(allTodos);
-   // _navigationService.goBack();
+    _navigationService.goBack();
     notifyListeners();
   }
   
@@ -45,14 +46,14 @@ class TodoViewmodel extends ChangeNotifier{
     _navigationService.showLoader();
     print(titleController.text);
     print(descriptionController.text);
-    var resData=await ApiProvider().post('/arar',{
+    var resData=await ApiProvider().post('/$ApiEndPoint',{
       "todo_title": titleController.text,
       "description": descriptionController.text
     });
     if(resData){
       getAllTodos();
       _navigationService.goBack();
-      //_navigationService.navigate(TodoList());
+     // _navigationService.navigate(TodoList());
       titleController.clear();
       descriptionController.clear();
     }
@@ -61,7 +62,7 @@ class TodoViewmodel extends ChangeNotifier{
     _navigationService.showLoader();
     print(titleController.text);
     print(descriptionController.text);
-    var resData=await ApiProvider().put('/arar/$id',{
+    var resData=await ApiProvider().put('/$ApiEndPoint/$id',{
       "todo_title": titleController.text,
       "description": descriptionController.text
     });
@@ -76,7 +77,7 @@ class TodoViewmodel extends ChangeNotifier{
 
   deleteTodo(id,index) async {
     _navigationService.showLoader();
-    var resData=await ApiProvider().delete('/arar/$id');
+    var resData=await ApiProvider().delete('/$ApiEndPoint/$id');
     _navigationService.goBack();
     if(resData){
       allTodos.removeAt(index);
